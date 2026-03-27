@@ -1,40 +1,70 @@
-<<<<<<< HEAD
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# userauth
 
-## Getting Started
+A high-performance User Management & Authentication Dashboard built with **Next.js 14**, **Material UI (MUI)**, and **TypeScript**. This project features a secure Gated UI, where the user management table is only accessible after a successful JWT-based login.
 
-First, run the development server:
+## 🚀 Key Features
 
-```bash
+-   **Gated User Flow**: Initial landing page with Login/Register options; Dashboard is hidden until authentication is successful.
+-   **JWT Authentication**: Complete flow for Registration and Login with secure token storage.
+-   **Advanced Data Management**: Uses `MUI DataGrid` for a professional table experience with built-in pagination and sorting.
+-   **Smart API Architecture**: 
+    -   **Axios Interceptors**: Automatically attaches the Bearer token to protected requests.
+    -   **Instance Separation**: Uses `userApi` for registration/updates and `getAlluserapi` for protected data fetching.
+-   **Hydration Fix**: Implemented the "Mounted" hook pattern to ensure stable rendering between Next.js SSR and browser `localStorage`.
+
+## 🛠️ Tech Stack
+
+-   **Framework**: Next.js 14 (App Router)
+-   **UI Library**: Material UI (MUI)
+-   **HTTP Client**: Axios
+-   **State Management**: React Context API
+-   **Language**: TypeScript
+
+## 📂 Project Structure
+
+```text
+src/
+├── app/
+│   ├── layout.tsx       # Root layout & Global UserProvider
+│   └── page.tsx         # Main Landing Page / Dashboard Router
+├── components/
+│   ├── LoginModal.tsx   # Login form with email/password
+│   ├── RegisterModal.tsx# Account creation (Names, Email, PWD)
+│   ├── UserModal.tsx    # CRUD form for User list updates
+│   └── UserTable.tsx    # Protected MUI DataGrid Table
+├── context/
+│   └── UserContext.tsx  # Centralized Auth & User state
+├── lib/
+│   └── axios.ts         # Axios instances (Public/Private)
+└── types/
+    └── user.ts          # TS Interfaces for User & Auth models
+
+⚙️ Installation & Setup
+1. Clone the repository:
+
+Bash
+git clone [YOUR_GITHUB_URL]
+cd userauth
+
+2. Install dependencies:
+
+Bash
+npm install
+
+3. Environment Configuration:
+Ensure your NestJS backend is running at http://localhost:5000. You can change this in src/lib/axios.ts or by creating a .env.local file.
+
+4. Start the app:
+
+Bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Open http://localhost:3000 to begin.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+📝 API Logic
+Public Routes: /auth/register, /auth/login, and /users (POST/PUT).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Protected Routes: /users (GET) requires a valid Authorization: Bearer <JWT> header.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Session Persistence: Auth state is saved in localStorage and synchronized across the app via Context.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-=======
-# userauth-fe
->>>>>>> 0c3bf3fa85bcec9dfad1bdab636266c191394c23
+Developed by Dipesh Panchal
