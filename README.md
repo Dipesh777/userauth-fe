@@ -67,4 +67,4 @@ Protected Routes: /users (GET) requires a valid Authorization: Bearer <JWT> head
 
 Session Persistence: Auth state is saved in localStorage and synchronized across the app via Context.
 
-Developed by Dipesh Panchal
+Developed by Dipesh Rajput
