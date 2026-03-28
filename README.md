@@ -60,6 +60,11 @@ Bash
 npm run dev
 Open http://localhost:3000 to begin.
 
+5. Login with email Id and Password
+
+email: dipesh@gmail.com
+password: 123456
+
 📝 API Logic
 Public Routes: /auth/register, /auth/login, and /users (POST/PUT).
 
