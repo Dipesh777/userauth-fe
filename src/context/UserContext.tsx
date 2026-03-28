@@ -75,7 +75,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     // Update user details
     const updateUser = async (updatedUser: User) => {
         try {
-            await withOutAuth.put(`/users/${updatedUser.id}`, updatedUser);
+            await userService.updateUser(updatedUser.id, updatedUser);
             setUsers(prev => prev.map(u => (u.id === updatedUser.id ? updatedUser : u)));
         } catch (error) {
             alert("Failed to update user on backend");
