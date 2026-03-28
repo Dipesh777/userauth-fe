@@ -5,15 +5,12 @@ import { useState } from 'react';
 import { useUsers } from '../context/UserContext';
 import { UserModal } from './UserModal';
 import { User } from '../types/user';
-import { LoginModal } from './LoginModal';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 
 export const UserTable = () => {
-    const { users, addUser, updateUser, loading, authUser, login, logout } = useUsers();
-    const [isModalOpen, setModalOpen] = useState(false);
+    const { users, addUser, updateUser, loading } = useUsers();    const [isModalOpen, setModalOpen] = useState(false);
     const [isUserModalOpen, setUserModalOpen] = useState(false);
-    const [isLoginModalOpen, setLoginModalOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
     const columns: GridColDef[] = [
@@ -43,18 +40,7 @@ export const UserTable = () => {
 
     return (
         <Box sx={{ width: '100%', maxWidth: 1000, mx: 'auto', mt: 4, p: 4 }}>
-            {/* Top Navigation Row */}
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
-                {authUser ? (
-                    <Stack direction="row" spacing={2} alignItems="center">
-                        <Typography variant="subtitle1">Welcome, <b>{authUser.name}</b></Typography>
-                        <Button variant="outlined" color="error" onClick={logout}>Logout</Button>
-                    </Stack>
-                ) : (
-                    <Button variant="contained" onClick={() => setLoginModalOpen(true)}>Login</Button>
-                )}
-            </Box>
-        
+
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
                 <Typography variant="h4" fontWeight="bold" color="primary">User List</Typography>
                 <Button
@@ -86,8 +72,6 @@ export const UserTable = () => {
                 initialData={selectedUser}
                 onSubmit={(data) => selectedUser ? updateUser(data) : addUser(data)}
             />
-            <LoginModal open={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} onLogin={login} />
-
         </Box>
     );
 };
