@@ -9,7 +9,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 
 export const UserTable = () => {
-    const { users, addUser, updateUser, loading } = useUsers();    const [isModalOpen, setModalOpen] = useState(false);
+    const { users, addUser, updateUser, loading } = useUsers();    
+    const [isModalOpen, setModalOpen] = useState(false);
     const [isUserModalOpen, setUserModalOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
@@ -46,7 +47,7 @@ export const UserTable = () => {
                 <Button
                     variant="contained"
                     startIcon={<AddIcon />}
-                    onClick={() => { setSelectedUser(null); setModalOpen(true); }}
+                    onClick={() => { setSelectedUser(null); setUserModalOpen(true); }}
                     sx={{ borderRadius: 2 }}
                 >
                     Add New User

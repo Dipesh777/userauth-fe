@@ -11,13 +11,13 @@ interface UserModalProps {
 }
 
 export const UserModal = ({ open, onClose, onSubmit, initialData }: UserModalProps) => {
-    const [formData, setFormData] = useState({ first_name: '', last_name: '', email: '' });
-    const [errors, setErrors] = useState({ first_name: false, last_name: false, email: false });
+    const [formData, setFormData] = useState({ first_name: '', last_name: '', email: '', password: '' });
+    const [errors, setErrors] = useState({ first_name: false, last_name: false, email: false, password: false });
 
     useEffect(() => {
         if (initialData) setFormData(initialData);
-        else setFormData({ first_name: '', last_name: '', email: '' });
-        setErrors({ first_name: false, last_name: false, email: false });
+        else setFormData({ first_name: '', last_name: '', email: '', password: '' });
+        setErrors({ first_name: false, last_name: false, email: false, password: false });
     }, [initialData, open]);
 
     const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -27,6 +27,7 @@ export const UserModal = ({ open, onClose, onSubmit, initialData }: UserModalPro
             first_name: !formData.first_name.trim(),
             last_name: !formData.last_name.trim(),
             email: !validateEmail(formData.email),
+            password: !initialData && !formData.password.trim(),
         };
         setErrors(newErrors);
 
@@ -66,6 +67,15 @@ export const UserModal = ({ open, onClose, onSubmit, initialData }: UserModalPro
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     />
+                    {!initialData && <TextField
+                        label="Password"
+                        type="password"
+                        fullWidth
+                        required
+                        error={errors.password}
+                        helperText={errors.password ? "Password is required" : ""}
+                        onChange={(e) => setFormData({ ...formData, password: e.target.value })} />}
+
                 </Stack>
             </DialogContent>
             <DialogActions sx={{ p: 3 }}>
